@@ -4,4 +4,5 @@ import java.math.BigDecimal;
 
 public interface BankServices {
      void makingDepositByAccount(BigDecimal depositAmount, Account account);
+     void makingWithdrawalByAccount(BigDecimal withdrawalAmount, Account account);
 }

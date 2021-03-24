@@ -37,7 +37,7 @@ public class AccountTest
     }
 
     @Test
-    @DisplayName("It should have 200 in the account balance when making deposit of 100")
+    @DisplayName("It should have 200 in the account balance when add 100")
     public void it_should_have_200_in_the_account_when_add_100(){
         //GIVEN
         Account account = new Account(BigDecimal.valueOf(100));
@@ -47,6 +47,19 @@ public class AccountTest
 
         //THEN
         Assertions.assertEquals(BigDecimal.valueOf(200), account.getBalance());
+    }
+
+    @Test
+    @DisplayName("It should have 100 in the account balance when subtract 50")
+    public void it_should_have_100_in_the_account_when_remove_50(){
+        //GIVEN
+        Account account = new Account(BigDecimal.valueOf(150));
+
+        //WHEN
+        account.subtract(BigDecimal.valueOf(50));
+
+        //THEN
+        Assertions.assertEquals(BigDecimal.valueOf(100), account.getBalance());
     }
 
 }
