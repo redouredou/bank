@@ -45,7 +45,7 @@ public class BankServicesTest {
             bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(150), compteCourant);
         });
 
-        String expectedMessage = "You can't withdraw more than you have in your account balance";
+        String expectedMessage = Error.UNAUTHORIZED_WITHDRAWAL.toString();
         String actualMessage = exception.getMessage();
 
         Assertions.assertTrue(actualMessage.contains(expectedMessage));

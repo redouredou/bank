@@ -15,7 +15,7 @@ public class BankServicesImpl implements BankServices{
         if(withdrawalAccount.compareTo(account.getBalance()) == -1){
             account.subtract(withdrawalAccount);
         }else{
-            throw new IllegalArgumentException("You can't withdraw more than you have in your account balance");
+            throw new IllegalArgumentException(Error.UNAUTHORIZED_WITHDRAWAL.toString());
         }
     }
 }
