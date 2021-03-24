@@ -11,8 +11,8 @@ public class AccountTest
 {
 
     @Test
-    @DisplayName("It should have 0 to the account when it's created by default")
-    public void it_should_have_0_to_the_account_when_account_created(){
+    @DisplayName("It should have 0 in the account when it's created by default")
+    public void it_should_have_0_in_the_account_when_account_created(){
         //GIVEN
         Account account = new Account();
 
@@ -24,8 +24,8 @@ public class AccountTest
     }
 
     @Test
-    @DisplayName("It should have 100 to the account when the account is initialized with 100")
-    public void it_should_have_100_to_the_account_when_account_is_initialized_with_100(){
+    @DisplayName("It should have 100 in the account when the account is initialized with 100")
+    public void it_should_have_100_in_the_account_when_account_is_initialized_with_100(){
         //GIVEN
         Account account = new Account(BigDecimal.valueOf(100));
 
@@ -37,17 +37,16 @@ public class AccountTest
     }
 
     @Test
-    @DisplayName("It should have 200 to the account balance when making deposit of 100")
-    public void it_should_have_200_to_the_account_when_account_is_initialized_with_100(){
+    @DisplayName("It should have 200 in the account balance when making deposit of 100")
+    public void it_should_have_200_in_the_account_when_add_100(){
         //GIVEN
         Account account = new Account(BigDecimal.valueOf(100));
 
         //WHEN
-        account.makingDepositOf(BigDecimal.valueOf(100));
+        account.add(BigDecimal.valueOf(100));
 
         //THEN
         Assertions.assertEquals(BigDecimal.valueOf(200), account.getBalance());
     }
-
 
 }

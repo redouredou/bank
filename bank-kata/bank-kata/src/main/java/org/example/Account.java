@@ -16,7 +16,8 @@ public class Account {
         return this.balance;
     }
 
-    public void makingDepositOf(BigDecimal depositAmount){
+    public void add(BigDecimal depositAmount){
         this.balance = this.balance.add(depositAmount);
     }
+
 }
