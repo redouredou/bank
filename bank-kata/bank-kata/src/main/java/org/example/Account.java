@@ -15,4 +15,8 @@ public class Account {
     public BigDecimal getBalance(){
         return this.balance;
     }
+
+    public void makingDepositOf(BigDecimal depositAmount){
+        this.balance = this.balance.add(depositAmount);
+    }
 }

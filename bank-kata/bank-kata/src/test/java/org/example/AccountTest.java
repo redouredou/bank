@@ -35,4 +35,19 @@ public class AccountTest
         //THEN
         Assertions.assertEquals(BigDecimal.valueOf(100), actualBalance);
     }
+
+    @Test
+    @DisplayName("It should have 200 to the account balance when making deposit of 100")
+    public void it_should_have_200_to_the_account_when_account_is_initialized_with_100(){
+        //GIVEN
+        Account account = new Account(BigDecimal.valueOf(100));
+
+        //WHEN
+        account.makingDepositOf(BigDecimal.valueOf(100));
+
+        //THEN
+        Assertions.assertEquals(BigDecimal.valueOf(200), account.getBalance());
+    }
+
+
 }
