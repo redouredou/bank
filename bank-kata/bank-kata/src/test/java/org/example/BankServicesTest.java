@@ -34,4 +34,21 @@ public class BankServicesTest {
         Assertions.assertEquals(BigDecimal.valueOf(90), compteCourant.getBalance());
 
     }
+
+    @Test
+    public void it_throw_an_IllegalArgumentException_when_withdrawal_amount_is_strictly_greater_than_account_balance(){
+        //GIVEN
+        Account compteCourant = new Account(BigDecimal.valueOf(100));
+
+        //WHEN
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(150), compteCourant);
+        });
+
+        String expectedMessage = "You can't withdraw more than you have in your account balance";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
+
+    }
 }
