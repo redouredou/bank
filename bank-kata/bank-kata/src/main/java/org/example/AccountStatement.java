@@ -1,7 +1,6 @@
 package org.example;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class AccountStatement {
     private BigDecimal balance;

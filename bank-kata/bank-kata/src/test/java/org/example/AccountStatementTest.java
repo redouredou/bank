@@ -20,13 +20,12 @@ public class AccountStatementTest {
         Account account = new Account(BigDecimal.valueOf(100));
         AccountStatement accountStatement = new AccountStatement();
 
-        List<AccountStatement> accountStatements = new ArrayList<>();
 
-        bankServices.makingDepositByAccount(BigDecimal.valueOf(20), account, accountStatements);
+        bankServices.makingDepositByAccount(BigDecimal.valueOf(20), account);
 
-        Assertions.assertEquals("25/03/2021", accountStatements.get(0).getDate());
-        Assertions.assertEquals(BigDecimal.valueOf(20), accountStatements.get(0).getAmount());
-        Assertions.assertEquals(BigDecimal.valueOf(120), accountStatements.get(0).getBalance());
+        Assertions.assertEquals("25/03/2021", account.getAccountStatements().get(0).getDate());
+        Assertions.assertEquals(BigDecimal.valueOf(20), account.getAccountStatements().get(0).getAmount());
+        Assertions.assertEquals(BigDecimal.valueOf(120), account.getAccountStatements().get(0).getBalance());
     }
 
     @Test
@@ -37,15 +36,15 @@ public class AccountStatementTest {
         Account account = new Account(BigDecimal.valueOf(100));
         List<AccountStatement> accountStatements = new ArrayList<>();
 
-        bankServices.makingDepositByAccount(BigDecimal.valueOf(20), account, accountStatements);
-        bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(30), account, accountStatements);
+        bankServices.makingDepositByAccount(BigDecimal.valueOf(20), account);
+        bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(30), account);
 
-        Assertions.assertEquals("25/03/2021", accountStatements.get(0).getDate());
-        Assertions.assertEquals(BigDecimal.valueOf(20), accountStatements.get(0).getAmount());
-        Assertions.assertEquals(BigDecimal.valueOf(120), accountStatements.get(0).getBalance());
+        Assertions.assertEquals("25/03/2021", account.getAccountStatements().get(0).getDate());
+        Assertions.assertEquals(BigDecimal.valueOf(20), account.getAccountStatements().get(0).getAmount());
+        Assertions.assertEquals(BigDecimal.valueOf(120), account.getAccountStatements().get(0).getBalance());
 
-        Assertions.assertEquals("25/03/2021", accountStatements.get(1).getDate());
-        Assertions.assertEquals(BigDecimal.valueOf(30), accountStatements.get(1).getAmount());
-        Assertions.assertEquals(BigDecimal.valueOf(90), accountStatements.get(1).getBalance());
+        Assertions.assertEquals("25/03/2021", account.getAccountStatements().get(1).getDate());
+        Assertions.assertEquals(BigDecimal.valueOf(30), account.getAccountStatements().get(1).getAmount());
+        Assertions.assertEquals(BigDecimal.valueOf(90), account.getAccountStatements().get(1).getBalance());
     }
 }

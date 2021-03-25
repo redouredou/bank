@@ -17,8 +17,7 @@ public class BankServicesTest {
         Account compteCourant = new Account(BigDecimal.valueOf(100));
 
         //WHEN
-        List<AccountStatement> accountStatements = new ArrayList<>();
-        bankServices.makingDepositByAccount(BigDecimal.valueOf(10), compteCourant, accountStatements);
+        bankServices.makingDepositByAccount(BigDecimal.valueOf(10), compteCourant);
 
         //THEN
         Assertions.assertEquals(BigDecimal.valueOf(110), compteCourant.getBalance());
@@ -31,8 +30,7 @@ public class BankServicesTest {
         Account compteCourant = new Account(BigDecimal.valueOf(100));
 
         //WHEN
-        List<AccountStatement> accountStatements = new ArrayList<>();
-        bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(10), compteCourant, accountStatements);
+        bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(10), compteCourant);
 
         //THEN
         Assertions.assertEquals(BigDecimal.valueOf(90), compteCourant.getBalance());
@@ -45,8 +43,7 @@ public class BankServicesTest {
         Account compteCourant = new Account(BigDecimal.valueOf(100));
 
         //WHEN
-        List<AccountStatement> accountStatements = new ArrayList<>();
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(150), compteCourant, accountStatements));
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(150), compteCourant));
 
         String expectedMessage = Error.UNAUTHORIZED_WITHDRAWAL.toString();
         String actualMessage = exception.getMessage();
