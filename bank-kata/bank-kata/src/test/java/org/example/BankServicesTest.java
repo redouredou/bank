@@ -51,4 +51,16 @@ public class BankServicesTest {
         Assertions.assertTrue(actualMessage.contains(expectedMessage));
 
     }
+
+    @Test
+    public void it_should_display_an_empty_history_of_the_operation_accounts(){
+        //GIVEN
+        Account account = new Account();
+
+        //WHEN
+        String history = bankServices.printStatementsHistory(account);
+
+        //THEN
+        Assertions.assertEquals("| OPERATION | DATE | AMOUNT | BALANCE |", history);
+    }
 }

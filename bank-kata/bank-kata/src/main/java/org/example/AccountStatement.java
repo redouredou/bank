@@ -3,13 +3,15 @@ package org.example;
 import java.math.BigDecimal;
 
 public class AccountStatement {
+    private OperationTypes operationTypes;
     private BigDecimal balance;
     private String date;
     private BigDecimal amount;
 
     public AccountStatement(){}
 
-    public AccountStatement(String date, BigDecimal amount, BigDecimal balance){
+    public AccountStatement(OperationTypes operationTypes, String date, BigDecimal amount, BigDecimal balance){
+        this.operationTypes = operationTypes;
         this.date = date;
         this.amount = amount;
         this.balance = balance;
@@ -37,5 +39,9 @@ public class AccountStatement {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public String getOperationTypes(){
+        return this.operationTypes.name();
     }
 }
