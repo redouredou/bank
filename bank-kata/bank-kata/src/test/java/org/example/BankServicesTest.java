@@ -65,7 +65,7 @@ public class BankServicesTest {
     }
 
     @Test
-    public void it_should_display_an_history_with_one_operation_maked(){
+    public void it_should_display_an_history_with_one_operation_made(){
         //GIVEN
         Account account = new Account();
         bankServices.makingDepositByAccount(BigDecimal.valueOf(50), account);
@@ -77,4 +77,21 @@ public class BankServicesTest {
         Assertions.assertEquals("| OPERATION | DATE | AMOUNT | BALANCE |\n" +
                 "| DEPOSIT | 25/03/2021 | 50 | 50 |", history);
     }
+
+    @Test
+    public void it_should_display_an_history_with_two_operation_made(){
+        //GIVEN
+        Account account = new Account();
+        bankServices.makingDepositByAccount(BigDecimal.valueOf(50), account);
+        bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(10), account);
+
+        //WHEN
+        String history = bankServices.printStatementsHistory(account);
+
+        //THEN
+        Assertions.assertEquals("| OPERATION | DATE | AMOUNT | BALANCE |\n" +
+                "| DEPOSIT | 25/03/2021 | 50 | 50 |\n" +
+                "| WITHDRAWAL | 25/03/2021 | 10 | 40 |", history);
+    }
+
 }
