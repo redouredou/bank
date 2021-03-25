@@ -1,4 +1,4 @@
-package org.example;
+package org.example.utils;
 
 import java.text.DateFormat;
 import java.util.Date;

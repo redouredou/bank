@@ -1,4 +1,4 @@
-package org.example;
+package org.example.model;
 
 import java.math.BigDecimal;
 
@@ -21,24 +21,12 @@ public class AccountStatement {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public BigDecimal getAmount() {
         return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
     }
 
     public String getOperationTypes(){

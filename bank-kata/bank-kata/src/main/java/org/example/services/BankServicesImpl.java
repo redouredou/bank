@@ -1,12 +1,15 @@
-package org.example;
+package org.example.services;
+
+import org.example.model.Account;
+import org.example.model.AccountStatement;
+import org.example.model.Error;
+import org.example.model.OperationTypes;
+import org.example.utils.Utils;
 
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
-public class BankServicesImpl implements BankServices{
+public class BankServicesImpl implements BankServices {
 
 
     @Override
@@ -21,7 +24,7 @@ public class BankServicesImpl implements BankServices{
     }
 
     @Override
-    public void makingWithdrawalByAccount(BigDecimal withdrawalAccount, Account account) {
+    public void makingWithdrawalByAccount(BigDecimal withdrawalAccount, Account account){
         if(withdrawalAccount.compareTo(account.getBalance()) < 0){
             account.subtract(withdrawalAccount);
             account.updateAccountStatements(new AccountStatement(
@@ -44,7 +47,10 @@ public class BankServicesImpl implements BankServices{
             AccountStatement accountStatement;
             for(int i = 0; i < account.getAccountStatements().size() ; i++){
                 accountStatement = account.getAccountStatements().get(i);
-                result.append("| ").append(accountStatement.getOperationTypes()).append(" | ").append(accountStatement.getDate()).append(" | ").append(accountStatement.getAmount()).append(" | ").append(accountStatement.getBalance()).append(" |");
+                result.append("| ").append(accountStatement.getOperationTypes())
+                        .append(" | ").append(accountStatement.getDate())
+                        .append(" | ").append(accountStatement.getAmount())
+                        .append(" | ").append(accountStatement.getBalance()).append(" |");
                 if(i != account.getAccountStatements().size() - 1){
                     result.append("\n");
                 }

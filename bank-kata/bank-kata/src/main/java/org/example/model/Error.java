@@ -1,4 +1,4 @@
-package org.example;
+package org.example.model;
 
 public enum Error {
     UNAUTHORIZED_WITHDRAWAL(0, "You can't withdraw more than you have in your account balance");
@@ -6,7 +6,7 @@ public enum Error {
     private final int code;
     private final String description;
 
-    private Error(int code, String description) {
+    Error(int code, String description) {
         this.code = code;
         this.description = description;
     }
