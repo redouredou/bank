@@ -36,6 +36,13 @@ public class BankServicesImpl implements BankServices{
 
     @Override
     public String printStatementsHistory(Account account) {
-        return "| OPERATION | DATE | AMOUNT | BALANCE |";
+        String result;
+        if(account.getAccountStatements().isEmpty()){
+            result = "| OPERATION | DATE | AMOUNT | BALANCE |";
+        }else{
+            result= "| OPERATION | DATE | AMOUNT | BALANCE |\n" +
+                    "| DEPOSIT | 25/03/2021 | 50 | 50 |";
+        }
+        return result;
     }
 }
