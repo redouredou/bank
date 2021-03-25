@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BankServicesTest {
 
@@ -15,7 +17,8 @@ public class BankServicesTest {
         Account compteCourant = new Account(BigDecimal.valueOf(100));
 
         //WHEN
-        bankServices.makingDepositByAccount(BigDecimal.valueOf(10), compteCourant);
+        List<AccountStatement> accountStatements = new ArrayList<>();
+        bankServices.makingDepositByAccount(BigDecimal.valueOf(10), compteCourant, accountStatements);
 
         //THEN
         Assertions.assertEquals(BigDecimal.valueOf(110), compteCourant.getBalance());
@@ -28,7 +31,8 @@ public class BankServicesTest {
         Account compteCourant = new Account(BigDecimal.valueOf(100));
 
         //WHEN
-        bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(10), compteCourant);
+        List<AccountStatement> accountStatements = new ArrayList<>();
+        bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(10), compteCourant, accountStatements);
 
         //THEN
         Assertions.assertEquals(BigDecimal.valueOf(90), compteCourant.getBalance());
@@ -41,9 +45,8 @@ public class BankServicesTest {
         Account compteCourant = new Account(BigDecimal.valueOf(100));
 
         //WHEN
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(150), compteCourant);
-        });
+        List<AccountStatement> accountStatements = new ArrayList<>();
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(150), compteCourant, accountStatements));
 
         String expectedMessage = Error.UNAUTHORIZED_WITHDRAWAL.toString();
         String actualMessage = exception.getMessage();
