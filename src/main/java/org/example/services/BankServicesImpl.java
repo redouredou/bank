@@ -33,23 +33,21 @@ public class BankServicesImpl implements BankServices {
 
     @Override
     public String printStatementsHistory(Account account) {
-        StringBuilder result;
+        String result;
+        StringBuilder resultBuilder;
         if(account.getAccountStatements().isEmpty()){
-            result = new StringBuilder("| OPERATION | DATE | AMOUNT | BALANCE |");
+            result = "| OPERATION | DATE | AMOUNT | BALANCE |";
         }else{
-            result = new StringBuilder("| OPERATION | DATE | AMOUNT | BALANCE |\n");
-            AccountStatement accountStatement;
-            for(int i = 0; i < account.getAccountStatements().size() ; i++){
-                accountStatement = account.getAccountStatements().get(i);
-                result.append("| ").append(accountStatement.getOperationTypes())
+            resultBuilder = new StringBuilder("| OPERATION | DATE | AMOUNT | BALANCE |\n");
+            account.getAccountStatements().forEach(accountStatement ->
+                    resultBuilder.append("| ").append(accountStatement.getOperationTypes())
                         .append(" | ").append(accountStatement.getDate())
                         .append(" | ").append(accountStatement.getAmount().getValue())
-                        .append(" | ").append(accountStatement.getBalance()).append(" |");
-                if(i != account.getAccountStatements().size() - 1){
-                    result.append("\n");
-                }
-            }
+                        .append(" | ").append(accountStatement.getBalance()).append(" |")
+                        .append("\n"));
+
+                result = resultBuilder.substring(0, resultBuilder.length() - 1);
         }
-        return result.toString();
+        return result;
     }
 }
