@@ -1,11 +1,10 @@
 package org.example.services;
 
 import org.example.model.Account;
-
-import java.math.BigDecimal;
+import org.example.model.Amount;
 
 public interface BankServices{
-     void makingDepositByAccount(BigDecimal depositAmount, Account account);
-     void makingWithdrawalByAccount(BigDecimal withdrawalAmount, Account account);
+     void makingDepositByAccount(Amount depositAmount, Account account);
+     void makingWithdrawalByAccount(Amount withdrawalAmount, Account account);
      String printStatementsHistory(Account account);
 }

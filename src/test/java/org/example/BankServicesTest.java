@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.model.Account;
+import org.example.model.Amount;
 import org.example.model.Error;
 import org.example.services.BankServices;
 import org.example.services.BankServicesImpl;
@@ -12,24 +13,24 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class BankServicesTest {
+class BankServicesTest {
 
     BankServices bankServices = new BankServicesImpl();
 
     static String date;
 
     @BeforeAll
-    public static void init(){
+    static void init(){
         date = Utils.getFormattedDate(new Date());
     }
 
     @Test
-    public void it_should_makeDeposit_of_10_on_selected_account(){
+    void it_should_makeDeposit_of_10_on_selected_account(){
         //GIVEN
         Account compteCourant = new Account(BigDecimal.valueOf(100));
 
         //WHEN
-        bankServices.makingDepositByAccount(BigDecimal.valueOf(10), compteCourant);
+        bankServices.makingDepositByAccount(new Amount(BigDecimal.valueOf(10)), compteCourant);
 
         //THEN
         Assertions.assertEquals(BigDecimal.valueOf(110), compteCourant.getBalance());
@@ -37,12 +38,12 @@ public class BankServicesTest {
     }
 
     @Test
-    public void it_should_makeWithdrawal_of_10_on_selected_account(){
+    void it_should_makeWithdrawal_of_10_on_selected_account(){
         //GIVEN
         Account compteCourant = new Account(BigDecimal.valueOf(100));
 
         //WHEN
-        bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(10), compteCourant);
+        bankServices.makingWithdrawalByAccount(new Amount(BigDecimal.valueOf(10)), compteCourant);
 
         //THEN
         Assertions.assertEquals(BigDecimal.valueOf(90), compteCourant.getBalance());
@@ -50,12 +51,12 @@ public class BankServicesTest {
     }
 
     @Test
-    public void it_throw_an_IllegalArgumentException_when_withdrawal_amount_is_strictly_greater_than_account_balance(){
+    void it_throw_an_IllegalArgumentException_when_withdrawal_amount_is_strictly_greater_than_account_balance(){
         //GIVEN
         Account compteCourant = new Account(BigDecimal.valueOf(100));
-
+        Amount amount = new Amount(BigDecimal.valueOf(150));
         //WHEN
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(150), compteCourant));
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> bankServices.makingWithdrawalByAccount(amount, compteCourant));
 
         String expectedMessage = Error.UNAUTHORIZED_WITHDRAWAL.toString();
         String actualMessage = exception.getMessage();
@@ -65,7 +66,7 @@ public class BankServicesTest {
     }
 
     @Test
-    public void it_should_display_an_empty_history_of_the_operation_accounts_if_there_is_no_operations(){
+    void it_should_display_an_empty_history_of_the_operation_accounts_if_there_is_no_operations(){
         //GIVEN
         Account account = new Account();
 
@@ -77,10 +78,10 @@ public class BankServicesTest {
     }
 
     @Test
-    public void it_should_display_an_history_with_one_operation_made(){
+    void it_should_display_an_history_with_one_operation_made(){
         //GIVEN
         Account account = new Account();
-        bankServices.makingDepositByAccount(BigDecimal.valueOf(50), account);
+        bankServices.makingDepositByAccount(new Amount(BigDecimal.valueOf(50)), account);
 
         //WHEN
         String history = bankServices.printStatementsHistory(account);
@@ -91,11 +92,11 @@ public class BankServicesTest {
     }
 
     @Test
-    public void it_should_display_an_history_with_two_operation_made(){
+    void it_should_display_an_history_with_two_operation_made(){
         //GIVEN
         Account account = new Account();
-        bankServices.makingDepositByAccount(BigDecimal.valueOf(50), account);
-        bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(10), account);
+        bankServices.makingDepositByAccount(new Amount(BigDecimal.valueOf(50)), account);
+        bankServices.makingWithdrawalByAccount(new Amount(BigDecimal.valueOf(10)), account);
 
         //WHEN
         String history = bankServices.printStatementsHistory(account);

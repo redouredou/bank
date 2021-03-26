@@ -1,36 +1,32 @@
 package org.example.services;
 
-import org.example.model.Account;
-import org.example.model.AccountStatement;
+import org.example.model.*;
 import org.example.model.Error;
-import org.example.model.OperationTypes;
 import org.example.utils.Utils;
-
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class BankServicesImpl implements BankServices {
 
 
     @Override
-    public void makingDepositByAccount(BigDecimal depositAmount, Account account) {
-        account.add(depositAmount);
+    public void makingDepositByAccount(Amount depositAmount, Account account) {
+        account.add(depositAmount.getValue());
         account.updateAccountStatements(new AccountStatement(
                 OperationTypes.DEPOSIT,
                 Utils.getFormattedDate(new Date()),
-                depositAmount,
+                depositAmount.getValue(),
                 account.getBalance()));
 
     }
 
     @Override
-    public void makingWithdrawalByAccount(BigDecimal withdrawalAccount, Account account){
-        if(withdrawalAccount.compareTo(account.getBalance()) < 0){
-            account.subtract(withdrawalAccount);
+    public void makingWithdrawalByAccount(Amount withdrawalAccount, Account account){
+        if(withdrawalAccount.getValue().compareTo(account.getBalance()) < 0){
+            account.subtract(withdrawalAccount.getValue());
             account.updateAccountStatements(new AccountStatement(
                     OperationTypes.WITHDRAWAL,
                     Utils.getFormattedDate(new Date()),
-                    withdrawalAccount,
+                    withdrawalAccount.getValue(),
                     account.getBalance()));
         }else{
             throw new IllegalArgumentException(Error.UNAUTHORIZED_WITHDRAWAL.toString());
