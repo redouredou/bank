@@ -69,12 +69,13 @@ class AccountTest
         //GIVEN
         Account account = new Account(BigDecimal.valueOf(150));
         AccountStatement accountException = new AccountStatement(OperationTypes.DEPOSIT, "25/03/20", new Amount(BigDecimal.TEN), BigDecimal.TEN);
-        account.updateAccountStatements(accountException);
+
+        account.updateAccountStatements(OperationTypes.DEPOSIT, "25/03/20", new Amount(BigDecimal.TEN));
 
         List<AccountStatement> accountStatementList = account.getAccountStatements();
 
         //WHEN
-        Exception exception = Assertions.assertThrows( UnsupportedOperationException.class, () -> {
+        Assertions.assertThrows( UnsupportedOperationException.class, () -> {
             accountStatementList.add(accountException);
         });
 

@@ -30,8 +30,8 @@ public class Account {
         this.balance = this.balance.subtract(amount);
     }
 
-    public void updateAccountStatements(AccountStatement accountStatement){
-        accountStatements.add(accountStatement);
+    public void updateAccountStatements(OperationTypes operationTypes,String date, Amount amount){
+        accountStatements.add(new AccountStatement(operationTypes, date, amount, this.balance));
     }
 
     public List<AccountStatement> getAccountStatements(){

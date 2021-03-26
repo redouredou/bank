@@ -11,11 +11,10 @@ public class BankServicesImpl implements BankServices {
     @Override
     public void makingDepositByAccount(Amount depositAmount, Account account) {
         account.add(depositAmount.getValue());
-        account.updateAccountStatements(new AccountStatement(
+        account.updateAccountStatements(
                 OperationTypes.DEPOSIT,
                 Utils.getFormattedDate(new Date()),
-                depositAmount,
-                account.getBalance()));
+                depositAmount);
 
     }
 
@@ -23,11 +22,10 @@ public class BankServicesImpl implements BankServices {
     public void makingWithdrawalByAccount(Amount withdrawalAccount, Account account){
         if(withdrawalAccount.getValue().compareTo(account.getBalance()) < 0){
             account.subtract(withdrawalAccount.getValue());
-            account.updateAccountStatements(new AccountStatement(
+            account.updateAccountStatements(
                     OperationTypes.WITHDRAWAL,
                     Utils.getFormattedDate(new Date()),
-                    withdrawalAccount,
-                    account.getBalance()));
+                    withdrawalAccount);
         }else{
             throw new IllegalArgumentException(Error.UNAUTHORIZED_WITHDRAWAL.toString());
         }
