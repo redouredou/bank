@@ -4,17 +4,24 @@ import org.example.model.Account;
 import org.example.model.AccountStatement;
 import org.example.services.BankServices;
 import org.example.services.BankServicesImpl;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.example.utils.Utils;
+import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AccountStatementTest {
 
     BankServices bankServices = new BankServicesImpl();
+
+    static String date;
+
+    @BeforeAll
+    public static void init(){
+        date = Utils.getFormattedDate(new Date());
+    }
 
     @Test
     @DisplayName("it should the one account statement according to the operation with the date, amount and balance")
@@ -27,7 +34,7 @@ public class AccountStatementTest {
 
         bankServices.makingDepositByAccount(BigDecimal.valueOf(20), account);
 
-        Assertions.assertEquals("25/03/2021", account.getAccountStatements().get(0).getDate());
+        Assertions.assertEquals(date, account.getAccountStatements().get(0).getDate());
         Assertions.assertEquals(BigDecimal.valueOf(20), account.getAccountStatements().get(0).getAmount());
         Assertions.assertEquals(BigDecimal.valueOf(120), account.getAccountStatements().get(0).getBalance());
     }
@@ -43,11 +50,11 @@ public class AccountStatementTest {
         bankServices.makingDepositByAccount(BigDecimal.valueOf(20), account);
         bankServices.makingWithdrawalByAccount(BigDecimal.valueOf(30), account);
 
-        Assertions.assertEquals("25/03/2021", account.getAccountStatements().get(0).getDate());
+        Assertions.assertEquals(date, account.getAccountStatements().get(0).getDate());
         Assertions.assertEquals(BigDecimal.valueOf(20), account.getAccountStatements().get(0).getAmount());
         Assertions.assertEquals(BigDecimal.valueOf(120), account.getAccountStatements().get(0).getBalance());
 
-        Assertions.assertEquals("25/03/2021", account.getAccountStatements().get(1).getDate());
+        Assertions.assertEquals(date, account.getAccountStatements().get(1).getDate());
         Assertions.assertEquals(BigDecimal.valueOf(30), account.getAccountStatements().get(1).getAmount());
         Assertions.assertEquals(BigDecimal.valueOf(90), account.getAccountStatements().get(1).getBalance());
     }

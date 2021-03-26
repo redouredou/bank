@@ -4,14 +4,24 @@ import org.example.model.Account;
 import org.example.model.Error;
 import org.example.services.BankServices;
 import org.example.services.BankServicesImpl;
+import org.example.utils.Utils;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class BankServicesTest {
 
     BankServices bankServices = new BankServicesImpl();
+
+    static String date;
+
+    @BeforeAll
+    public static void init(){
+        date = Utils.getFormattedDate(new Date());
+    }
 
     @Test
     public void it_should_makeDeposit_of_10_on_selected_account(){
@@ -77,7 +87,7 @@ public class BankServicesTest {
 
         //THEN
         Assertions.assertEquals("| OPERATION | DATE | AMOUNT | BALANCE |\n" +
-                "| DEPOSIT | 25/03/2021 | 50 | 50 |", history);
+                "| DEPOSIT | "+date+" | 50 | 50 |", history);
     }
 
     @Test
@@ -92,8 +102,8 @@ public class BankServicesTest {
 
         //THEN
         Assertions.assertEquals("| OPERATION | DATE | AMOUNT | BALANCE |\n" +
-                "| DEPOSIT | 25/03/2021 | 50 | 50 |\n" +
-                "| WITHDRAWAL | 25/03/2021 | 10 | 40 |", history);
+                "| DEPOSIT | "+date+" | 50 | 50 |\n" +
+                "| WITHDRAWAL | "+date+" | 10 | 40 |", history);
     }
 
 }
