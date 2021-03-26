@@ -2,6 +2,7 @@ package org.example.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Account {
@@ -34,7 +35,7 @@ public class Account {
     }
 
     public List<AccountStatement> getAccountStatements(){
-        return accountStatements;
+        return Collections.unmodifiableList(accountStatements);
     }
 
 

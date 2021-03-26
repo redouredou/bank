@@ -14,7 +14,7 @@ public class BankServicesImpl implements BankServices {
         account.updateAccountStatements(new AccountStatement(
                 OperationTypes.DEPOSIT,
                 Utils.getFormattedDate(new Date()),
-                depositAmount.getValue(),
+                depositAmount,
                 account.getBalance()));
 
     }
@@ -26,7 +26,7 @@ public class BankServicesImpl implements BankServices {
             account.updateAccountStatements(new AccountStatement(
                     OperationTypes.WITHDRAWAL,
                     Utils.getFormattedDate(new Date()),
-                    withdrawalAccount.getValue(),
+                    withdrawalAccount,
                     account.getBalance()));
         }else{
             throw new IllegalArgumentException(Error.UNAUTHORIZED_WITHDRAWAL.toString());
@@ -45,7 +45,7 @@ public class BankServicesImpl implements BankServices {
                 accountStatement = account.getAccountStatements().get(i);
                 result.append("| ").append(accountStatement.getOperationTypes())
                         .append(" | ").append(accountStatement.getDate())
-                        .append(" | ").append(accountStatement.getAmount())
+                        .append(" | ").append(accountStatement.getAmount().getValue())
                         .append(" | ").append(accountStatement.getBalance()).append(" |");
                 if(i != account.getAccountStatements().size() - 1){
                     result.append("\n");

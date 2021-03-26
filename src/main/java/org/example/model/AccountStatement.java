@@ -6,11 +6,11 @@ public class AccountStatement {
     private OperationTypes operationTypes;
     private BigDecimal balance;
     private String date;
-    private BigDecimal amount;
+    private Amount amount;
 
     public AccountStatement(){}
 
-    public AccountStatement(OperationTypes operationTypes, String date, BigDecimal amount, BigDecimal balance){
+    public AccountStatement(OperationTypes operationTypes, String date, Amount amount, BigDecimal balance){
         this.operationTypes = operationTypes;
         this.date = date;
         this.amount = amount;
@@ -25,7 +25,7 @@ public class AccountStatement {
         return date;
     }
 
-    public BigDecimal getAmount() {
+    public Amount getAmount() {
         return amount;
     }
 

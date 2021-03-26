@@ -1,14 +1,12 @@
 package org.example;
 
 
-import org.example.model.Account;
-import org.example.model.Amount;
-import org.example.model.Error;
+import org.example.model.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
+import java.util.List;
 
 class AccountTest
 {
@@ -63,6 +61,23 @@ class AccountTest
 
         //THEN
         Assertions.assertEquals(BigDecimal.valueOf(100), account.getBalance());
+    }
+
+    @Test
+    @DisplayName("It should return UnsupportedOperationException when adding into getAccountStatements list")
+    void it_should_throw_UnsupportedOperationException_when_add_into_getAccountStatements_list(){
+        //GIVEN
+        Account account = new Account(BigDecimal.valueOf(150));
+        AccountStatement accountException = new AccountStatement(OperationTypes.DEPOSIT, "25/03/20", new Amount(BigDecimal.TEN), BigDecimal.TEN);
+        account.updateAccountStatements(accountException);
+
+        List<AccountStatement> accountStatementList = account.getAccountStatements();
+
+        //WHEN
+        Exception exception = Assertions.assertThrows( UnsupportedOperationException.class, () -> {
+            accountStatementList.add(accountException);
+        });
+
     }
 
 
